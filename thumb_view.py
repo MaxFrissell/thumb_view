@@ -18,8 +18,11 @@ class ImageViewer:
     def __init__(self, root, image_dir):
         self.root = root
         self.image_dir = image_dir
-        # Preserve filesystem order, not alphabetical
-        self.image_files = [f for f in os.listdir(image_dir) if f.lower().endswith(".png")]
+        # Alphabetical order
+        self.image_files = sorted(
+        (f for f in os.listdir(image_dir) if f.lower().endswith(".png")),
+            key=str.lower)
+
         self.index = 0
         self.cache = {}  # cache to hold preloaded images
 
